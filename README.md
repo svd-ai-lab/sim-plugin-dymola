@@ -86,6 +86,20 @@ For a visible Dymola window:
 sim connect --solver dymola --ui-mode gui
 ```
 
+### GUI Collaboration
+
+The GUI session can be used as a live visual companion, but Dymola did not
+auto-refresh externally edited `.mo` files in local testing. After changing a
+file on disk, explicitly ask Dymola to re-read it:
+
+```bash
+sim exec 'openModel("C:/path/to/Model.mo", true, true)'
+```
+
+With Dymola 2026x Refresh 1 on Windows, this refreshed the visible Diagram
+view after external edits. Be careful with unsaved GUI edits: the forced
+reopen path may discard in-memory changes in the already-open class.
+
 ## Local Documentation
 
 Dymola 2026x Refresh 1 includes substantial local documentation. The plugin

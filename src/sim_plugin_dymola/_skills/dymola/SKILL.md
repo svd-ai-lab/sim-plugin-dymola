@@ -44,6 +44,12 @@ Prefer these local docs over memory when choosing Dymola API calls.
 - If `simulateModel()` fails with a compiler message, configure a supported
   Visual C++, MinGW GCC, or WSL compiler in Dymola before retrying.
 - Prefer script/API execution over GUI automation.
+- For GUI collaboration, launch with `sim connect --solver dymola --ui-mode
+  gui`, then open/reload edited files with
+  `sim exec 'openModel("C:/path/to/Model.mo", true, true)'`. Local testing
+  showed that Dymola does not auto-refresh externally saved `.mo` changes, but
+  this forced reload updates the visible Diagram view. Avoid it when there are
+  unsaved GUI-side edits you need to preserve.
 
 ## Validation Gaps
 

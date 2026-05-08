@@ -1,0 +1,29 @@
+driver: dymola
+sdk_package: bundled-with-dymola
+status: real_install_alpha
+validation: local_api_smoke
+
+profiles:
+  - name: dymola_2026x_refresh_1_local_api
+    sdk: dymola-2026.1-py3-none-any.whl
+    solver_versions: ["2026x Refresh 1"]
+    active_sdk_layer: bundled_python_interface
+    active_solver_layer: local_smoke
+    notes: |
+      Validated on one Windows install at C:\Program Files\Dymola 2026x
+      Refresh 1. The bundled Python API imports from
+      Modelica\Library\python_interface\dymola-2026.1-py3-none-any.whl.
+      DymolaVersion(), RunScript() for a tiny .mos file, openModel(), and
+      checkModel() were smoke-tested. simulateModel() reached translation but
+      failed because no supported C compiler was selected on the host.
+
+  - name: dymola_generic_local_install
+    sdk: bundled-with-install
+    solver_versions: ["investigate"]
+    active_sdk_layer: discover_from_install
+    active_solver_layer: needs_validation
+    notes: |
+      Public and local documentation describe Python, Java, JavaScript, FMI,
+      Simulink, CSV, and HDF5 interfacing. The driver discovers local docs and
+      the bundled Python wheel, but install paths, license failures, compiler
+      setup, Linux behavior, and production result artifacts need more hosts.

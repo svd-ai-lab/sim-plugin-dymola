@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sim-plugin-dymola"
+version = "0.1.0"
+description = "Real-install alpha Dymola driver for sim-cli, distributed as an out-of-tree plugin."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [{ name = "svd-ai-lab" }]
+keywords = ["dymola", "modelica", "cae", "simulation", "sim-cli", "plugin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Scientific/Engineering",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+    "sim-cli-core>=0.3",
+]
+
+[project.optional-dependencies]
+api = []
+test = [
+    "pytest>=7",
+    "build>=1.0",
+]
+
+[project.entry-points."sim.drivers"]
+dymola = "sim_plugin_dymola:DymolaDriver"
+
+[project.entry-points."sim.skills"]
+dymola = "sim_plugin_dymola:skills_dir"
+
+[project.entry-points."sim.plugins"]
+dymola = "sim_plugin_dymola:plugin_info"
+
+[project.urls]
+Homepage = "https://github.com/svd-ai-lab/sim-plugin-dymola"
+Repository = "https://github.com/svd-ai-lab/sim-plugin-dymola"
+Issues = "https://github.com/svd-ai-lab/sim-plugin-dymola/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sim_plugin_dymola"]
+include = ["src/sim_plugin_dymola/**"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "integration: tests that build wheels or touch external tooling",
+]
